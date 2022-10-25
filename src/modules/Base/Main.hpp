@@ -23,19 +23,21 @@
 namespace ECMABase {
 class Main {
 public:
-    virtual ~Main();
+    virtual ~Main() {}
     /// @brief Called right after initialization of this class
     /// @param argc argument count passed in directly from main
     /// @param argv arguments, passed directly from main
-    virtual void Preload(int argc, char** argv);
+    virtual void Preload(int argc, char** argv) {}
     /// @brief Load the file into memory (if it is small enough for that)
     /// @param path path to the file to be executed
-    virtual void Load(std::string& path);
+    virtual void Load(std::string& path) {}
     /// @brief Called after Load, here as a tokenizing step. 
-    virtual void Postload(void);
+    virtual void Postload(void) {}
     /// @brief  Execute loaded program.
     /// @return return value for the program.
-    virtual int Run(void);
+    virtual int Run(void) {
+        return 0;
+    }
 };
 }
 
