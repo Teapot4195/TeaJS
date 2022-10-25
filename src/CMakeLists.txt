@@ -1,0 +1,1 @@
+set(SRC_SRC src/Main.cpp src/modules/ECMA1997/Main.cpp)
