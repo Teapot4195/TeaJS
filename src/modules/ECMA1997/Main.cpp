@@ -22,13 +22,10 @@
 #include <iostream>
 #include <list>
 
-ECMA1997::Main::~Main() {
+ECMA1997::Main::~Main() {}
+ECMA1997::Main::Main() {}
 
-}
-
-void ECMA1997::Main::Preload(int argc, char** argv) {
-
-}
+void ECMA1997::Main::Preload(int argc, char** argv) {}
 
 void ECMA1997::Main::Load(std::string& path) {
     std::ifstream FileHandle;
@@ -173,20 +170,24 @@ void ECMA1997::Main::Load(std::string& path) {
         toks = newtoks;
     }
 
-    /* punctuator token initialization, memory save, humongous block of code, maybe i can do better? */
-    Tok* EQ = new Tok(Punk_EQ); Tok* CloseAngle = new Tok(Punk_CloseAngle); Tok* OpenAngle = new Tok(Punk_OpenAngle); Tok* EQEQ = new Tok(Punk_EQEQ); Tok* LTEQ = new Tok(Punk_LTEQ); Tok* GTEQ = new Tok(Punk_GTEQ);
-    Tok* NEQ = new Tok(Punk_EXEQ); Tok* Comma = new Tok(Punk_Comma); Tok* NOT = new Tok(Punk_EX); Tok* Tilde = new Tok(Punk_Tilde); Tok* Question = new Tok(Punk_Question); Tok* Colon = new Tok(Punk_Colon);
-    Tok* Dot = new Tok(Punk_dot); Tok* LogiAnd = new Tok(Punk_ANDAND); Tok* LogiOr = new Tok(Punk_PIPEPIPE); Tok* Incr = new Tok(Punk_PLUSPLUS); Tok* Decr = new Tok(Punk_MINUSMINUS); Tok* Add = new Tok(Punk_Plus);
-    Tok* Minus = new Tok(Punk_Minus); Tok* Multi = new Tok(Punk_Star); Tok* Div = new Tok(Punk_ForwdSlash); Tok* BitAnd = new Tok(Punk_Amp); Tok* BitOr = new Tok(Punk_Pipe); Tok* BitXOR = new Tok(Punk_Hat);
-    Tok* Modulo = new Tok(Punk_Mod); Tok* LeftShift = new Tok(Punk_OpenAngleAngle); Tok* SignRightShift = new Tok(Punk_CloseAngleAngle); Tok* UnsignRightShift = new Tok(Punk_CloseAngleAngleAngle); Tok* PlusAssign = new Tok(Punk_AddAsign); Tok* MinusAssign = new Tok(Punk_MinusAssign);
-    Tok* MultiAssign = new Tok(Punk_StarAssign); Tok* DivAssign = new Tok(Punk_SlashAsign); Tok* BitAndAssign = new Tok(Punk_AmpAssign); Tok* BitOrAssign = new Tok(Punk_PipeAssign); Tok* XORAssign = new Tok(Punk_HatAssign); Tok* ModAssign = new Tok(Punk_ModAssign);
-    Tok* LeftShiftAssign = new Tok(Punk_OpenAngleAngleEQ); Tok* SignRightShiftAssign = new Tok(Punk_CloseAngleAngleEQ); Tok* UnsignRightShiftAssign = new Tok(Punk_CloseAngleAngleAngleEQ); Tok* OpenParentheses = new Tok(Punk_OpenPrentheses); Tok* CloseParentheses = new Tok(Punk_CloseParentheses); Tok* OpenCurly = new Tok(Punk_OpenCurlyBracket);
-    Tok* CloseCurly = new Tok(Punk_CloseCurlyBracket); Tok* OpenSquare = new Tok(Punk_OpenSquare); Tok* CloseSquare = new Tok(Punk_CloseSquare); Tok* SemiColon = new Tok(Punk_Semicolon);
 
     /* Stage two, split the source text into more tokens.
      * in a nested scope to allow the c++ compiler to automatically free the newtoks list
      */
     {
+        /* punctuator token initialization, memory save, humongous block of code, maybe i can do better?
+         * Because this is all manually allocated (no automatic allocation)
+         * none of these class instances are freed, which is what we want
+         */
+        Tok* EQ = new Tok(Punk_EQ); Tok* CloseAngle = new Tok(Punk_CloseAngle); Tok* OpenAngle = new Tok(Punk_OpenAngle); Tok* EQEQ = new Tok(Punk_EQEQ); Tok* LTEQ = new Tok(Punk_LTEQ); Tok* GTEQ = new Tok(Punk_GTEQ);
+        Tok* NEQ = new Tok(Punk_EXEQ); Tok* Comma = new Tok(Punk_Comma); Tok* NOT = new Tok(Punk_EX); Tok* Tilde = new Tok(Punk_Tilde); Tok* Question = new Tok(Punk_Question); Tok* Colon = new Tok(Punk_Colon);
+        Tok* Dot = new Tok(Punk_dot); Tok* LogiAnd = new Tok(Punk_ANDAND); Tok* LogiOr = new Tok(Punk_PIPEPIPE); Tok* Incr = new Tok(Punk_PLUSPLUS); Tok* Decr = new Tok(Punk_MINUSMINUS); Tok* Add = new Tok(Punk_Plus);
+        Tok* Minus = new Tok(Punk_Minus); Tok* Multi = new Tok(Punk_Star); Tok* Div = new Tok(Punk_ForwdSlash); Tok* BitAnd = new Tok(Punk_Amp); Tok* BitOr = new Tok(Punk_Pipe); Tok* BitXOR = new Tok(Punk_Hat);
+        Tok* Modulo = new Tok(Punk_Mod); Tok* LeftShift = new Tok(Punk_OpenAngleAngle); Tok* SignRightShift = new Tok(Punk_CloseAngleAngle); Tok* UnsignRightShift = new Tok(Punk_CloseAngleAngleAngle); Tok* PlusAssign = new Tok(Punk_AddAsign); Tok* MinusAssign = new Tok(Punk_MinusAssign);
+        Tok* MultiAssign = new Tok(Punk_StarAssign); Tok* DivAssign = new Tok(Punk_SlashAsign); Tok* BitAndAssign = new Tok(Punk_AmpAssign); Tok* BitOrAssign = new Tok(Punk_PipeAssign); Tok* XORAssign = new Tok(Punk_HatAssign); Tok* ModAssign = new Tok(Punk_ModAssign);
+        Tok* LeftShiftAssign = new Tok(Punk_OpenAngleAngleEQ); Tok* SignRightShiftAssign = new Tok(Punk_CloseAngleAngleEQ); Tok* UnsignRightShiftAssign = new Tok(Punk_CloseAngleAngleAngleEQ); Tok* OpenParentheses = new Tok(Punk_OpenPrentheses); Tok* CloseParentheses = new Tok(Punk_CloseParentheses); Tok* OpenCurly = new Tok(Punk_OpenCurlyBracket);
+        Tok* CloseCurly = new Tok(Punk_CloseCurlyBracket); Tok* OpenSquare = new Tok(Punk_OpenSquare); Tok* CloseSquare = new Tok(Punk_CloseSquare); Tok* SemiColon = new Tok(Punk_Semicolon);
+
         std::list<Tok*> newtoks;
         Tok* current;
         for (auto it = toks.begin(); it != toks.end(); it++) {
@@ -419,6 +420,70 @@ void ECMA1997::Main::Load(std::string& path) {
 
         toks = newtoks;
     }
+
+    /* Process Idents into KW and actual idents
+     */
+    {   
+        // Allocate tokens for keywords
+        Tok* Break = new Tok(KW_break); Tok* For = new Tok(KW_for); Tok* New = new Tok(KW_new); Tok* Var = new Tok(KW_var);
+        Tok* Continue = new Tok(KW_continue); Tok* Function = new Tok(KW_function); Tok* Return = new Tok(KW_return); Tok* Void = new Tok(KW_void);
+        Tok* Delete = new Tok(KW_delete); Tok* If = new Tok(KW_if); Tok* This = new Tok(KW_this); Tok* While = new Tok(KW_while);
+        Tok* Else = new Tok(KW_else); Tok* In = new Tok(KW_in); Tok* Typeof = new Tok(KW_typeof); Tok* With = new Tok(KW_with); 
+        Tok* Reserved = new Tok(KW_ReservedKeyWord);
+
+        std::vector<std::string> ReservedKeywords = {
+            "case", "debugger", "export", "super",
+            "catch", "default", "extends", "switch",
+            "class", "do", "finally", "throw",
+            "const", "enum", "import", "try"
+        };
+
+        std::list <Tok*> newtoks;
+        Tok* current;
+        for (auto it = toks.begin(); it != toks.end(); it++) {
+            current = *it;
+            if (current->Type != ECMA1997::Token::Tok_IdentORKW) {
+                newtoks.push_back(current);
+            } else {
+                std::string val = current->val;
+                if (val == "break") { newtoks.push_back(Break);}
+                else if (val == "for") { newtoks.push_back(For);}
+                else if (val == "new") { newtoks.push_back(New);}
+                else if (val == "var") { newtoks.push_back(Var);}
+                else if (val == "continue") { newtoks.push_back(Continue);}
+                else if (val == "function") { newtoks.push_back(Function);}
+                else if (val == "return") { newtoks.push_back(Return);}
+                else if (val == "void") { newtoks.push_back(Void);}
+                else if (val == "delete") { newtoks.push_back(Delete);}
+                else if (val == "if") { newtoks.push_back(If);}
+                else if (val == "this") { newtoks.push_back(This);}
+                else if (val == "while") { newtoks.push_back(While);}
+                else if (val == "else") { newtoks.push_back(Else);}
+                else if (val == "in") { newtoks.push_back(In);}
+                else if (val == "typeof") { newtoks.push_back(Typeof);}
+                else if (val == "with") { newtoks.push_back(With); }
+                else {
+                    bool isReserved = false;
+                    for (auto et = ReservedKeywords.begin(); et != ReservedKeywords.end(); it++) {
+                        if (*et == val) {
+                            isReserved = true;
+                            break;
+                        }
+                    }
+                    if (isReserved) {
+                        //Make this Error more helpful than this.
+                        std::cout << "Reserved keyword (" << val << ") used." << std::endl;
+                        throw new std::runtime_error("A reserved keyword (" + val + ") was used in code.");
+                    }
+                }
+            }
+        }
+        toks = newtoks;
+    }
+
+    // aaand we are done (for now)
+    // throw the toks into a vector and we can call it a day
+    this->ProcessedSource = std::vector<Tok*>{std::begin(toks), std::end(toks)};
 }
 
 void ECMA1997::Main::Postload() {
@@ -427,4 +492,5 @@ void ECMA1997::Main::Postload() {
 
 int ECMA1997::Main::Run() {
 
+    return 0;
 }
