@@ -48,7 +48,9 @@ enum Token {
     KW_continue, KW_function, KW_return, KW_void,
     KW_delete, KW_if, KW_this, KW_while,
     KW_else, KW_in, KW_typeof, KW_with,
-    KW_ReservedKeyWord
+    KW_ReservedKeyWord,
+
+    Lit_Null, Lit_True, Lit_False
 };
 enum State {
     State_Standard,

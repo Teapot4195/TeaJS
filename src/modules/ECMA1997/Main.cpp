@@ -430,6 +430,7 @@ void ECMA1997::Main::Load(std::string& path) {
         Tok* Delete = new Tok(KW_delete); Tok* If = new Tok(KW_if); Tok* This = new Tok(KW_this); Tok* While = new Tok(KW_while);
         Tok* Else = new Tok(KW_else); Tok* In = new Tok(KW_in); Tok* Typeof = new Tok(KW_typeof); Tok* With = new Tok(KW_with); 
         Tok* Reserved = new Tok(KW_ReservedKeyWord);
+        Tok* True = new Tok(Lit_True); Tok* False = new Tok(Lit_False); Tok* Null = new Tok(Lit_Null);
 
         std::vector<std::string> ReservedKeywords = {
             "case", "debugger", "export", "super",
@@ -462,6 +463,9 @@ void ECMA1997::Main::Load(std::string& path) {
                 else if (val == "in") { newtoks.push_back(In);}
                 else if (val == "typeof") { newtoks.push_back(Typeof);}
                 else if (val == "with") { newtoks.push_back(With); }
+                else if (val == "null") { newtoks.push_back(Null); }
+                else if (val == "true") { newtoks.push_back(True); }
+                else if (val == "false") { newtoks.push_back(False); }
                 else {
                     bool isReserved = false;
                     for (auto et = ReservedKeywords.begin(); et != ReservedKeywords.end(); it++) {
@@ -491,6 +495,8 @@ void ECMA1997::Main::Postload() {
 }
 
 int ECMA1997::Main::Run() {
-
+    for (auto it = this->ProcessedSource.begin(); it != this->ProcessedSource.end(); it++) {
+        
+    }
     return 0;
 }
