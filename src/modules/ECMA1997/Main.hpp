@@ -21,6 +21,7 @@
 #include <modules/Base/Main.hpp>
 
 #include <string>
+#include <vector>
 
 namespace ECMA1997 {
 enum Token {
@@ -41,7 +42,7 @@ enum Token {
     Punk_OpenAngleAngleEQ, Punk_CloseAngleAngleEQ, Punk_CloseAngleAngleAngleEQ, Punk_OpenPrentheses, Punk_CloseParentheses, Punk_OpenCurlyBracket, //<<=, >>=, >>>=, (, ), {
     Punk_CloseCurlyBracket, Punk_OpenSquare, Punk_CloseSquare, Punk_Semicolon,
 
-    Tok_IdentORKW,
+    Tok_IdentORKW, Tok_IDENT,
 
     KW_break, KW_for, KW_new, KW_var,
     KW_continue, KW_function, KW_return, KW_void,
@@ -50,7 +51,7 @@ enum Token {
     RKW_case, RKW_debugger, RKW_export, RKW_super,
     RKW_catch, RKW_default, RKW_extends, RKW_switch,
     RKW_class, RKW_do, RKW_finally, RKW_throw,
-    RKW_const, RKW_enum, RKW_import, RKW_try,
+    RKW_const, RKW_enum, RKW_import, RKW_try
 };
 enum State {
     State_Standard,
@@ -70,6 +71,7 @@ struct Tok {
 };
 class Main : public ECMABase::Main {
 public:
+    Main();
     ~Main();
     void Preload(int, char**);
     void Load(std::string&);
@@ -77,6 +79,7 @@ public:
     int Run(void);
 private:
     void printTok(Tok*);
+    std::vector<Tok*> ProcessedSource;
 };
 }
 
