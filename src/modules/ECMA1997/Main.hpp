@@ -48,10 +48,7 @@ enum Token {
     KW_continue, KW_function, KW_return, KW_void,
     KW_delete, KW_if, KW_this, KW_while,
     KW_else, KW_in, KW_typeof, KW_with,
-    RKW_case, RKW_debugger, RKW_export, RKW_super,
-    RKW_catch, RKW_default, RKW_extends, RKW_switch,
-    RKW_class, RKW_do, RKW_finally, RKW_throw,
-    RKW_const, RKW_enum, RKW_import, RKW_try
+    KW_ReservedKeyWord
 };
 enum State {
     State_Standard,
